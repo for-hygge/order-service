@@ -11,19 +11,19 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class OrderEventProducer {
-//    private final KafkaTemplate<String, Object> kafkaTemplate;
-//
-//    @Value("${app.kafka.topic.order-created}")
-//    private String orderCreatedTopic;
-//
-//    public void sendOrderCreated(OrderCreatedEvent event) {
-//        kafkaTemplate.send(orderCreatedTopic, event.getOrderId(), event)
-//                .whenComplete((result, ex) -> {
-//                    if (ex != null) {
-//                        log.error("Failed to send order-created event, orderId={}", event.getOrderId(), ex);
-//                    } else {
-//                        log.info("Sent order-created event, orderId={}", event.getOrderId());
-//                    }
-//                });
-//    }
+    private final KafkaTemplate<String, Object> kafkaTemplate;
+
+    @Value("${app.kafka.topic.order-created}")
+    private String orderCreatedTopic;
+
+    public void sendOrderCreated(OrderCreatedEvent event) {
+        kafkaTemplate.send(orderCreatedTopic, event.getOrderId(), event)
+                .whenComplete((result, ex) -> {
+                    if (ex != null) {
+                        log.error("Failed to send order-created event, orderId={}", event.getOrderId(), ex);
+                    } else {
+                        log.info("Sent order-created event, orderId={}", event.getOrderId());
+                    }
+                });
+    }
 }

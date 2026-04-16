@@ -23,7 +23,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
-//    private final OrderEventProducer orderEventProducer;
+    private final OrderEventProducer orderEventProducer;
 
     public List<OrderResponse> getOrders(Long userId) {
         log.info("Getting orders by userId = {}", userId);
@@ -86,13 +86,13 @@ public class OrderServiceImpl implements OrderService {
 
         Order saved = orderRepository.save(order);
 
-//        OrderCreatedEvent event = OrderCreatedEvent.builder()
-//                .orderId(saved.getOrderId())
-//                .userId(saved.getUserId())
-//                .amount(saved.getTotalAmount())
-//                .paymentMethod("CREDIT_CARD")
-//                .build();
-//        orderEventProducer.sendOrderCreated(event);
+        OrderCreatedEvent event = OrderCreatedEvent.builder()
+                .orderId(saved.getOrderId())
+                .userId(saved.getUserId())
+                .amount(saved.getTotalAmount())
+                .paymentMethod("CREDIT_CARD")
+                .build();
+        orderEventProducer.sendOrderCreated(event);
 
         return orderResponseMapper(saved);
     }

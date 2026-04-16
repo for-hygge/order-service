@@ -12,12 +12,10 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PaymentCreatedEvent {
-
     private String paymentId;
     private String orderId;
     private Long userId;
     private BigDecimal amount;
-    private String currency;
     private String status;
     private String paymentMethod;
 }

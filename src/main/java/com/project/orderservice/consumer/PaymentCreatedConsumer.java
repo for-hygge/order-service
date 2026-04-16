@@ -16,17 +16,17 @@ import java.time.LocalDateTime;
 public class PaymentCreatedConsumer {
     private final OrderRepository orderRepository;
 
-//    @KafkaListener(topics = "${app.kafka.topic.payment-created}", groupId = "order-service-group")
-//    public void consume(PaymentCreatedEvent event) {
-//        log.info("Received payment-created event: {}", event);
-//
-//        Order order = orderRepository.findByOrderId(event.getOrderId())
-//                .orElseThrow(() -> new RuntimeException("Order not found, orderId = " + event.getOrderId()));
-//
-//        order.setPaymentId(event.getPaymentId());
-//        order.setStatus("PENDING_PAYMENT");
-//        order.setUpdatedAt(LocalDateTime.now());
-//
-//        orderRepository.save(order);
-//    }
+    @KafkaListener(topics = "${app.kafka.topic.payment-created}", groupId = "order-service-group")
+    public void consume(PaymentCreatedEvent event) {
+        log.info("Received payment-created event: {}", event);
+
+        Order order = orderRepository.findByOrderId(event.getOrderId())
+                .orElseThrow(() -> new RuntimeException("Order not found, orderId = " + event.getOrderId()));
+
+        order.setPaymentId(event.getPaymentId());
+        order.setStatus("PENDING_PAYMENT");
+        order.setUpdatedAt(LocalDateTime.now());
+
+        orderRepository.save(order);
+    }
 }
