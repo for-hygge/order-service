@@ -19,3 +19,6 @@ http://localhost:8080/v1/orders
 ## Dependencies
 - Lombok
 - AWS RDS(MySQL)
+
+## Known Issues
+Kafka only works for order creation flow.
