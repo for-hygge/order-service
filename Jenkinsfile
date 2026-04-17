@@ -8,36 +8,35 @@ pipeline {
     }
 
     stages {
-
         stage('Checkout') {
             steps {
                 git 'https://github.com/for-hygge/order-service.git'
             }
         }
 
-        stage('Build') {
+        stage('Build (Simulated)') {
             steps {
-                dir('order-service') {
-                    sh 'mvn clean package -DskipTests'
-                }
+                echo 'Building project (simulated)'
             }
         }
 
-        stage('Build Docker Image') {
+        stage('Test (Simulated)') {
             steps {
-                dir('order-service') {
-                    sh 'docker build -t $IMAGE_NAME .'
-                }
+                echo 'Running tests (simulated)'
             }
         }
 
-        stage('Deploy') {
+        stage('Docker Build (Simulated)') {
             steps {
-                sh '''
-                docker stop $CONTAINER_NAME || true
-                docker rm $CONTAINER_NAME || true
-                docker run -d -p $PORT:$PORT --name $CONTAINER_NAME $IMAGE_NAME
-                '''
+                echo "docker build -t ${IMAGE_NAME} ."
+            }
+        }
+
+        stage('Deploy (Simulated)') {
+            steps {
+                echo "docker stop ${CONTAINER_NAME} || true"
+                echo "docker rm ${CONTAINER_NAME} || true"
+                echo "docker run -d -p ${PORT}:${PORT} --name ${CONTAINER_NAME} ${IMAGE_NAME}"
             }
         }
     }
