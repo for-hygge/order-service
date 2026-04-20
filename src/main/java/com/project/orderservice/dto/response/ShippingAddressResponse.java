@@ -1,10 +1,14 @@
 package com.project.orderservice.dto.response;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class ShippingAddressResponse {
     private String customerName;
     private String phone;

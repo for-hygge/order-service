@@ -58,7 +58,7 @@ public class OrderServiceImpl implements OrderService {
         return OrderPaymentResponse.builder()
                 .orderId(order.getOrderId())
                 .paymentId(order.getPaymentId())
-                .paymentStatus(order.getPaymentId() == null ? "NOT_CREATED" : "PROCESSING")
+                .paymentStatus(order.getPaymentId() == null ? "NOT_CREATED" : order.getStatus())
                 .paymentMethod("CREDIT_CARD")
                 .amount(order.getTotalAmount())
                 .build();
