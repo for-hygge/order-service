@@ -7,13 +7,28 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class KafkaTopicConfig {
+
     @Bean
-    public NewTopic orderCreatedTopic(@Value("${app.kafka.topic.order-created}") String topicName) {
+    public NewTopic orderCreatedTopic(
+            @Value("${app.kafka.topic.order-created}") String topicName) {
         return new NewTopic(topicName, 1, (short) 1);
     }
 
     @Bean
-    public NewTopic paymentCreatedTopic(@Value("${app.kafka.topic.payment-created}") String topicName) {
+    public NewTopic paymentCreatedTopic(
+            @Value("${app.kafka.topic.payment-created}") String topicName) {
+        return new NewTopic(topicName, 1, (short) 1);
+    }
+
+    @Bean
+    public NewTopic paymentCancelledTopic(
+            @Value("${app.kafka.topic.payment-cancelled}") String topicName) {
+        return new NewTopic(topicName, 1, (short) 1);
+    }
+
+    @Bean
+    public NewTopic paymentRefundedTopic(
+            @Value("${app.kafka.topic.payment-refunded}") String topicName) {
         return new NewTopic(topicName, 1, (short) 1);
     }
 }
